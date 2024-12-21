@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-4 p-4" style="background:rgb(212, 185, 217);">
+    <div class="container d-flex justify-content-center align-items-center p-5 bg-body-secondary rounded">
+        <div class="col-lg-6 px-0">
+            <h1 class="display-4 fst-italic">Bienvenido {{ user.get_username }}</h1>
+            <p class="lead my-3">Tenemos una lista de productos exclusivos para ti. ¿Quieres conocer más?</p>
+            <a href="/contacto" class="btn btn-outline-secondary">Contacto</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    {% for flan in flanes %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if flan.image_url %}
+                    <img src="{{ flan.image_url }}" class="card-img-top" alt="{{ flan.name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Placeholder Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ flan.name }}</h5>
+                    <p class="card-text">{{ flan.description }}</p>
+                    <p class="card-text"><strong>Popularidad:</strong> {{ flan.popularity }}</p>
+                    <a href="{% url 'view_reviews' flan.slug %}" class="btn btn-outline-secondary">Ver Reseña</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add_review' flan.slug %}" class="btn btn-secondary">Añadir Reseña</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

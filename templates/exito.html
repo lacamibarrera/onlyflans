@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Éxito</h2>
+    <p>{{ message }}</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">Volver a la página principal</a>
+</div>
+{% endblock %}

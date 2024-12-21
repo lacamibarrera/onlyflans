@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">{{ flan.name }}</h2>
+
+
+    <div class="d-flex justify-content-center mb-4">
+        <div class="card shadow-sm" style="width: 18rem;">
+            {% if flan.image_url %}
+                <img src="{{ flan.image_url }}" class="card-img-top" alt="{{ flan.name }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Placeholder Image" style="height: 200px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ flan.name }}</h5>
+                <p class="card-text">{{ flan.description }}</p>
+                <p class="card-text"><strong>Popularidad:</strong> {{ flan.popularity }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reseñas del flan -->
+    <div class="mt-4">
+        <h3>Reseñas</h3>
+        {% for review in reviews %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p><strong>{{ review.user.username }}:</strong> {{ review.rating }} estrellas</p>
+                    <p>{{ review.comment }}</p>
+                    <small class="text-muted">Fecha: {{ review.date }}</small>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay reseñas para este flan.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

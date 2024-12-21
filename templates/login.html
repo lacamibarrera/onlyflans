@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6 bg-light p-4 rounded shadow">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="next" value="{% url 'bienvenido' %}">
+                <button type="submit" class="btn btn-secondary w-100">Iniciar Sesión</button>
+            
+        </form>
+        
+    </div>
+</div>
+{% endblock %}
